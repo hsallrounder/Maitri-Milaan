@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user_data.name }}</h2>
+    <p>Email: {{ user_data.email }}</p>
+    <p>Gender: {{ user_data.gender }}</p>
+    <p>Age: {{ user_data.age }}</p>
+    <p>Country: {{ user_data.country }}</p>
+    <p>State: {{ user_data.state }}</p>
+    <p>City: {{ user_data.city }}</p>
+    <h3>Preferred Matches</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Interests</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in preferred_matches %}
+            <tr>
+                <td>{{ match.name }}</td>
+                <td>{{ match.gender }}</td>
+                <td>{{ match.age }}</td>
+                <td>
+                    <ul>
+                        {% for interest in match.interests %}
+                        <li>{{ interest }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ match.country }}</td>
+                <td>{{ match.state }}</td>
+                <td>{{ match.city }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

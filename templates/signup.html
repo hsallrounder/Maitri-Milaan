@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+</head>
+<body>
+    <h2>Signup</h2>
+    <form method="post">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="name">Name:</label><br>
+        <input type="name" id="name" name="name" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required><br>
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br>
+        <label for="country">Country:</label><br>
+        <select id="country" name="country" required>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <!-- Add more countries as needed -->
+        </select><br>
+        <label for="state">State/Province:</label><br>
+        <input type="text" id="state" name="state" required><br>
+        <label for="city">City:</label><br>
+        <input type="text" id="city" name="city" required><br>
+        <label>Interests:</label><br>
+        <input type="checkbox" id="interest1" name="interest" value="Music">
+        <label for="interest1">Music</label><br>
+        <input type="checkbox" id="interest2" name="interest" value="Sports">
+        <label for="interest2">Sports</label><br>
+        <label for="gender_preference">Gender Preference:</label><br>
+        <select id="gender_preference" name="gender_preference" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br>
+        <label for="min_age">Minimum Age Preference:</label><br>
+        <input type="number" id="min_age" name="min_age" min="18" value="18" required><br>
+        <label for="max_age">Maximum Age Preference:</label><br>
+        <input type="number" id="max_age" name="max_age" min="18" required><br>
+        <input type="submit" value="Signup">
+    </form>
+</body>
+</html>
