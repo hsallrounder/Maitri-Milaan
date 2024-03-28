@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import firebase_admin
-from firebase_admin import credentials, auth, db
-from firebase_admin.auth import InvalidIdTokenError
+from firebase_admin import credentials, db, auth
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
@@ -65,6 +64,7 @@ def find_Matches(email):
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     email = request.args.get('data')
+    
     preferred_matches_df, user_row = find_Matches(email)
     
     user_data = user_row.to_dict()

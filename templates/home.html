@@ -1,16 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/styles/home.css" />
+  <title>Maitri Milaan</title>
 </head>
+
 <body>
-    <h1>Welcome to the Maitri Milaan</h1>
-    {% if logged_in %}
-        <p>You are logged in.</p>
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('signup') }}">Signup</a>
-    {% endif %}
+  <header class="header">
+    <nav>
+      <div class="nav__logo">
+        <a href="#">
+          <img src="../static/images/logo-color.png" alt="logo" class="logo-color" />
+          <img src="../static/images/logo-white.png" alt="logo" class="logo-white" />
+        </a>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('signup') }}">Signup</a></li>
+      </ul>
+      <div class="nav__menu__btn" id="menu-btn">
+        <span><i class="ri-menu-line"></i></span>
+      </div>
+    </nav>
+    <div class="header__container">
+      <div class="header__image"></div>
+      <div class="header__content">
+        <h3>DISCOVER WITH</h3>
+        <h1>MATRI MILAAN</h1>
+        <p>
+          Find the perfect match effortlessly with our innovative online matchmaking platform.
+          Input your interests, preferences, and values, and let our advanced algorithms do the work for you.
+          Whether you're passionate about travel, music, or outdoor adventures,
+          we're here to help you discover meaningful relationships tailored to your unique interests.
+          Begin your journey to finding the perfect match today.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="banner__card">
+      <div class="banner__content">
+        <h2>Try</h2>
+        <h2>Now!</h2>
+      </div>
+    </div>
+    <div class="banner__card">
+      <h4>Vibe Score</h4>
+      <p>
+        Your vibe score reflects the depth of compatibility you've achieved.
+      </p>
+      <a href="#">Read More</a>
+    </div>
+    <div class="banner__card">
+      <h4>Interests</h4>
+      <p>
+        Our interest filter sifts through to find matches based on shared interests.
+      </p>
+      <a href="#">Read More</a>
+    </div>
+    <div class="banner__card">
+      <h4>Sign Up Now</h4>
+      <p>
+        Unlock a world of possibilities - sign up now and start connecting with like-minded individuals!
+      </p>
+      <a href="#">Read More</a>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="../static/js/home.js"></script>
 </body>
+
 </html>

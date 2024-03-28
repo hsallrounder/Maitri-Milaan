@@ -1,51 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Signup</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form | Maitri Milaan</title>
+  <link rel="stylesheet" href="../static/styles/signup.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
-    <h2>Signup</h2>
-    <form method="post">
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        <label for="name">Name:</label><br>
-        <input type="name" id="name" name="name" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <label for="dob">Date of Birth:</label><br>
-        <input type="date" id="dob" name="dob" required><br>
+  <div class="wrapper">
+    <form action="/signup" method="post">
+      <h1>Signup</h1>
+      <div class="input-box">
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <div class="input-box">
+        <input type="name" id="name" name="name" placeholder="Name" required>
+      </div>
+      <div class="input-box">
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+      <div class="input-box">
+        <label for="dob">DOB:</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div class="input-box">
         <label for="gender">Gender:</label><br>
         <select id="gender" name="gender" required>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select><br>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="input-box">
         <label for="country">Country:</label><br>
         <select id="country" name="country" required>
-            <option value="usa">USA</option>
-            <option value="uk">UK</option>
-            <!-- Add more countries as needed -->
-        </select><br>
-        <label for="state">State/Province:</label><br>
-        <input type="text" id="state" name="state" required><br>
-        <label for="city">City:</label><br>
-        <input type="text" id="city" name="city" required><br>
-        <label>Interests:</label><br>
+          <option value="usa">USA</option>
+          <option value="uk">UK</option>
+          <!-- Add more countries as needed -->
+        </select>
+      </div>
+      <div class="input-box">
+        <input type="text" id="state" name="state" placeholder="State/Province" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="city" name="city" placeholder="City" required>
+      </div>
+      <div class="input-box">
         <input type="checkbox" id="interest1" name="interest" value="Music">
-        <label for="interest1">Music</label><br>
+        <label for="interest1">Music</label>
+      </div>
+      <div class="input-box">
         <input type="checkbox" id="interest2" name="interest" value="Sports">
-        <label for="interest2">Sports</label><br>
+        <label for="interest2">Sports</label>
+      </div>
+      <div class="input-box">
+        <input type="checkbox" id="interest3" name="interest" value="Anime">
+        <label for="interest3">Anime</label>
+      </div>
+      <div class="input-box">
+        <input type="checkbox" id="interest4" name="interest" value="Netflix">
+        <label for="interest4">Netflix</label>
+      </div>
+      <div class="input-box">
         <label for="gender_preference">Gender Preference:</label><br>
         <select id="gender_preference" name="gender_preference" required>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select><br>
-        <label for="min_age">Minimum Age Preference:</label><br>
-        <input type="number" id="min_age" name="min_age" min="18" value="18" required><br>
-        <label for="max_age">Maximum Age Preference:</label><br>
-        <input type="number" id="max_age" name="max_age" min="18" required><br>
-        <input type="submit" value="Signup">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="input-box">
+        <input type="number" id="min_age" name="min_age" min="18" placeholder="Minimum Age Preference"
+          required>
+      </div>
+      <div class="input-box">
+        <input type="number" id="max_age" name="max_age" min="18" placeholder="Maximum Age Preference" required>
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <div class="login-link">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+      </div>
     </form>
+  </div>
 </body>
+
 </html>

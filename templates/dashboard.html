@@ -1,48 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/dashboard.css">
 </head>
+
 <body>
-    <h2>Welcome, {{ user_data.name }}</h2>
-    <p>Email: {{ user_data.email }}</p>
-    <p>Gender: {{ user_data.gender }}</p>
-    <p>Age: {{ user_data.age }}</p>
-    <p>Country: {{ user_data.country }}</p>
-    <p>State: {{ user_data.state }}</p>
-    <p>City: {{ user_data.city }}</p>
-    <h3>Preferred Matches</h3>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>Interests</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for match in preferred_matches %}
-            <tr>
-                <td>{{ match.name }}</td>
-                <td>{{ match.gender }}</td>
-                <td>{{ match.age }}</td>
-                <td>
-                    <ul>
-                        {% for interest in match.interests %}
-                        <li>{{ interest }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>{{ match.country }}</td>
-                <td>{{ match.state }}</td>
-                <td>{{ match.city }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <main class="table" id="customers_table">
+        <div class="profile">
+            <h2>Welcome, {{ user_data.name }}</h2>
+            <div class="info">
+              <p><strong>Email:</strong> {{ user_data.email }}</p>
+              <p><strong>Gender:</strong> {{ user_data.gender }}</p>
+              <p><strong>Age:</strong> {{ user_data.age }}</p>
+              <p><strong>Country:</strong> {{ user_data.country }}</p>
+              <p><strong>State:</strong> {{ user_data.state }}</p>
+              <p><strong>City:</strong> {{ user_data.city }}</p>
+            </div>
+          </div>
+        <section class="table__header">
+            <h1>Preferred Matches</h1>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Interests</th>
+                        <th>Score</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for match in preferred_matches %}
+                    <tr>
+                        <td>{{ match.name }}</td>
+                        <td>{{ match.gender }}</td>
+                        <td>{{ match.age }}</td>
+                        <td>
+                            <ul>
+                                {% for interest in match.interests %}
+                                <li>{{ interest }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <p class="score green">20</p>
+                        </td>
+                        <td>{{ match.city }}</td>
+                        <td>{{ match.state }}</td>
+                        <td>{{ match.country }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script src="../static/js/dashboard.js"></script>
+
 </body>
+
 </html>
