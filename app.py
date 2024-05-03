@@ -1,10 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import firebase_admin
 from firebase_admin import credentials, db, auth
 import pandas as pd
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 from datetime import datetime
+import pytz
+from retrieve_suggestions import get_sug
+from retrieve_kundli import find_kundli_milan, find_data
 
 app = Flask(__name__)
 
@@ -25,22 +29,23 @@ def find_Matches(email):
     df = pd.DataFrame.from_dict(ref.get(), orient='index')
     df.reset_index(drop=True, inplace=True)
 
-    df['dob'] = pd.to_datetime(df['dob'])
+    df['dob'] = df['dob'].apply(lambda date_str: datetime.strptime(date_str, "%Y-%m-%d").date())
 
-    current_date = datetime.now()
-    
-    age_timedelta = current_date - df['dob']
-    age_years = age_timedelta.dt.days // 365
+    current_date = datetime.now().date()
+    df['age'] = df['dob'].apply(lambda x: (current_date - x).days // 365)
 
-    df['age'] = age_years
-    df.drop(['dob'], axis=1, inplace=True)
+    df['dob'] = df['dob'].apply(lambda x: x.strftime("%d-%b-%Y"))
 
     age_range = [user_data['min_age'], user_data['max_age']]
+
+    filtered_data = df.drop(df[df['email'] == email].index)
+
     filtered_data = df[(df['age'] >= age_range[0]) & 
                        (df['age'] <= age_range[1]) & 
-                       (df['gender'] == user_data['gender_preference'])]
+                       (df['gender'] == user_data['gender_preference'])]   
 
-    
+    filtered_data = filtered_data.drop(columns=['age', 'gender_preference'], axis=1)
+
     # Vectorize interests
     vectorizer = CountVectorizer()
     interests_matrix = vectorizer.fit_transform(filtered_data['interests'].apply(lambda x: ' '.join(x)))
@@ -57,9 +62,25 @@ def find_Matches(email):
 
     # Find the row corresponding to the user's email
     user_row = df[df['email'] == email].iloc[0]
-    df.drop(df[df['email'] == email].index, inplace=True)
 
     return filtered_data, user_row
+
+@app.route('/get_score', methods=['POST'])
+def get_score():
+    data = request.json
+    m_email = data.get('m_email')
+    f_email = data.get('f_email')
+    
+    gdetail = find_data(f_email,ref)
+    bdetail = find_data(m_email,ref)
+
+    res = find_kundli_milan(gdetail,bdetail)
+    # res = {
+    #     "result_color":"score red",
+    #     "score":"28",
+    # }
+    
+    return jsonify(res)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
@@ -72,24 +93,54 @@ def dashboard():
     preferred_matches_df = preferred_matches_df[preferred_matches_df['email'] != email]
     
     preferred_matches = preferred_matches_df.to_dict('records')
+
+    with open("milaan_result.html", "w", encoding="utf-8") as file:
+        pass
     
     return render_template('dashboard.html', user_data=user_data, preferred_matches=preferred_matches)
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    email_error = None
+    password_error = None
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
         tmp = ref.child(email.replace('.', ',')).get()
         if tmp is None:
-            return 'Email doesn\'t exists. Please choose a different email or signup.'
+            email_error = 'Email does not exist. Please choose a different email or sign up.'
         else:
             if tmp['password'] != password:
-                return "Wrong Password."
-            return redirect(url_for('dashboard', data=email))
-    return render_template('login.html')
+                password_error = 'Incorrect password.'
+            else:
+                return redirect(url_for('dashboard', data=email))
+    return render_template('login.html', email_error=email_error, password_error=password_error)
+
+
+def convert_to_ist(gmt_time_str):
+    # Create a datetime object from the GMT time string
+    gmt_time = datetime.strptime(gmt_time_str, "%H:%M")
+
+    # Set the time zone to GMT
+    gmt_timezone = pytz.timezone('GMT')
+    gmt_time = gmt_timezone.localize(gmt_time)
+
+    # Convert to IST
+    ist_timezone = pytz.timezone('Asia/Kolkata')
+    ist_time = gmt_time.astimezone(ist_timezone)
+
+    # Format the result as a string in 24-hour format
+    ist_time_str = ist_time.strftime("%H:%M")
+
+    return ist_time_str
+
+
+@app.route('/get_sug', methods=['POST'])
+def get_suggestions():
+    input_city = request.form['pob']
+    suggestions = get_sug(input_city)
+    return jsonify(suggestions)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -98,27 +149,27 @@ def signup():
         name = request.form['name']
         password = request.form['password']
         dob = request.form['dob']
+        tob = request.form['tob']
+        pob = request.form['pob']
         gender = request.form['gender']
-        country = request.form['country']
-        state = request.form['state']
-        city = request.form['city']
+        address = request.form['address']
         interests = request.form.getlist('interest')
         gender_preference = request.form['gender_preference']
         min_age = int(request.form['min_age'])
         max_age = int(request.form['max_age'])
         tmp = ref.child(email.replace('.', ',')).get()
         if tmp is not None:
-            return 'Email already exists. Please choose a different email or login.'
+            return 'Email already exists. Please choose a different email or login. <br> <a href="/signup">Go Back</a>'
         else:
             data = {
                 "email": email,
                 "name": name,
                 "password": password,
                 "dob": dob,
+                "tobinist": convert_to_ist(tob),
+                "pob": pob,
                 "gender": gender,
-                "country": country,
-                "state": state,
-                "city": city,
+                "address": address,
                 "interests": interests,
                 "gender_preference": gender_preference,
                 "min_age": min_age,

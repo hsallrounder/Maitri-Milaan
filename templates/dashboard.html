@@ -6,22 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="../static/styles/dashboard.css">
 </head>
 
 <body>
-    <main class="table" id="customers_table">
+    <main class="table" id="matches_table">
         <div class="profile">
             <h2>Welcome, {{ user_data.name }}</h2>
             <div class="info">
-              <p><strong>Email:</strong> {{ user_data.email }}</p>
-              <p><strong>Gender:</strong> {{ user_data.gender }}</p>
-              <p><strong>Age:</strong> {{ user_data.age }}</p>
-              <p><strong>Country:</strong> {{ user_data.country }}</p>
-              <p><strong>State:</strong> {{ user_data.state }}</p>
-              <p><strong>City:</strong> {{ user_data.city }}</p>
+                <p><strong>Email:</strong> <span id="email">{{ user_data.email }}</span></p>
+                <p><strong>Gender:</strong> <span id="gender">{{ user_data.gender }}</span></p>
+                <p><strong>DOB:</strong> {{ user_data.dob }}</p>
+                <p><strong>Interests:</strong> {{ user_data.interests }}</p>
+                <p><strong>TOB in IST (24HR):</strong> {{ user_data.tobinist }}</p>
+                <p><strong>POB:</strong> {{ user_data.pob }}</p>
+                <p><strong>Address</strong> {{ user_data.address }}</p>
             </div>
-          </div>
+        </div>
+        <div id="loading-overlay">
+            <div class="loader"></div>
+        </div>
         <section class="table__header">
             <h1>Preferred Matches</h1>
         </section>
@@ -30,21 +35,23 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Gender</th>
-                        <th>Age</th>
+                        <th>DOB</th>
                         <th>Interests</th>
+                        <th>TOB in IST (24HR)</th>
+                        <th>POB</th>
+                        <th>Address</th>
                         <th>Score</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Country</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for match in preferred_matches %}
                     <tr>
                         <td>{{ match.name }}</td>
+                        <td>{{ match.email }}</td>
                         <td>{{ match.gender }}</td>
-                        <td>{{ match.age }}</td>
+                        <td>{{ match.dob }}</td>
                         <td>
                             <ul>
                                 {% for interest in match.interests %}
@@ -52,18 +59,20 @@
                                 {% endfor %}
                             </ul>
                         </td>
+                        <td>{{ match.tobinist }}</td>
+                        <td>{{ match.pob }}</td>
+                        <td>{{ match.address }}</td>
                         <td>
-                            <p class="score green">20</p>
+                            <img class="searchIcon"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAgFJREFUSEvF1kvITWEUxvHfJ5SJKAZuI3clGRhQLpnIzIxEDJQyMGHgMlQMRBkpKWZyKTMGihK5hAxEKSLXmJCBkoG9cs5n2529zzq+c3xreHqe9V/7Pe/7Pu+QUaqhUeLKgMdiORZgMp7jPt6PZOgm8AwcwBZM7AC5i2O49C8D1IE34zQmJJpexUZ8S2iHJZ3A23C2lyZ4gFX4nvVVwUvwCGOyDUq6k9iV9VXBV7A+a67ofmI+Xmb8ZfCUYuJPpHZ6Xe+DONwreFMx8bmMqUFzA2szPcpfvBdHM6YGzQdMz/Qog/fhSMbUoPmKSZkeZfB2nMmYGjRxqcQt17XK4DhKj7s6mgWnsDPTo3qc3hQ31syMsUazAncy/ip4dxEEJzLGDprziJORqip4PG5hWcr9R/QDcxArlqpOd3VcJNexONXh9/08DhdxqAiMZxlfXTpFKh3HDkQe19UTbC2SaU8rPkMXl9B+vG4aoNtDYFar4TrMa+VyPASu4QIetpovxNMS6B1WF0O9qIN3A2dWra25XBzHDSVDDBjwj52a9BMcKxIbc2oJFJttTafE6ic4ePHXRFDMLsHfYiVelb+83+A2/B6mVf7zpfjc/m0Q4Og9F7dLyx7hEw/H4RoUOACLimy+2Uq8eI3+VYMEBygi8sugd3UvR29E76ueQP97qWuH+wVBgUUfag6CjQAAAABJRU5ErkJggg==" /></i>
                         </td>
-                        <td>{{ match.city }}</td>
-                        <td>{{ match.state }}</td>
-                        <td>{{ match.country }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </section>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../static/js/dashboard.js"></script>
 
 </body>

@@ -3,4 +3,8 @@ numpy
 scikit-learn
 pyarrow
 firebase-admin
-Flask
+flask
+bs4
+selenium
+json
+pytz

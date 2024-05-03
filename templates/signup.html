@@ -29,26 +29,25 @@
         <input type="date" id="dob" name="dob" required>
       </div>
       <div class="input-box">
+        <label for="tob">TOB</label>
+        <input type="time" id="tob" name="tob" required>
+      </div>
+      <div class="input-box">
+        <label for="pob">POB:</label>
+        <input type="text" id="pob" name="pob" placeholder="Enter City of Birth" required>
+        <i id="searchIcon" class='bx bx-search'></i>
+        <div id="loader" style="display: none;"></div>
+        <div id="suggestionsDropdown"></div>
+      </div>
+      <div class="input-box">
         <label for="gender">Gender:</label><br>
         <select id="gender" name="gender" required>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="other">Other</option>
         </select>
       </div>
       <div class="input-box">
-        <label for="country">Country:</label><br>
-        <select id="country" name="country" required>
-          <option value="usa">USA</option>
-          <option value="uk">UK</option>
-          <!-- Add more countries as needed -->
-        </select>
-      </div>
-      <div class="input-box">
-        <input type="text" id="state" name="state" placeholder="State/Province" required>
-      </div>
-      <div class="input-box">
-        <input type="text" id="city" name="city" placeholder="City" required>
+        <input type="text" id="address" name="address" placeholder="Address" required>
       </div>
       <div class="input-box">
         <input type="checkbox" id="interest1" name="interest" value="Music">
@@ -69,24 +68,24 @@
       <div class="input-box">
         <label for="gender_preference">Gender Preference:</label><br>
         <select id="gender_preference" name="gender_preference" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
       </div>
       <div class="input-box">
-        <input type="number" id="min_age" name="min_age" min="18" placeholder="Minimum Age Preference"
-          required>
+        <input type="number" id="min_age" name="min_age" min="18" placeholder="Minimum Age Preference" required>
       </div>
       <div class="input-box">
         <input type="number" id="max_age" name="max_age" min="18" placeholder="Maximum Age Preference" required>
       </div>
-      <button type="submit" class="btn">Login</button>
+      <button type="submit" class="btn">Signup</button>
       <div class="login-link">
         <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
       </div>
     </form>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../static/js/signup.js"></script>
 </body>
 
 </html>

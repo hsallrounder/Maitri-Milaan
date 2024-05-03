@@ -1,104 +1,233 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(../images/html_table.png) center / cover;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.wrapper {
+  width: 420px;
+  max-height: calc(100vh - 80px);
+  /* Adjust the height according to your header and footer */
+  overflow-y: auto;
+  /* Make the wrapper scrollable */
+  background-color: rgba(255, 255, 255, .5);
+  /* Adjust the background color */
+  backdrop-filter: blur(7px);
+  box-shadow: 0 .4rem .8rem #0005;
+  color: #000000;
+  border-radius: 12px;
+  padding: 30px 40px;
+  margin: auto;
+  /* Center the wrapper */
+}
+
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.wrapper .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+
+  margin: 30px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #000000;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: #000000;
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translate(-50%);
+  font-size: 20px;
+
+}
+
+.input-box input[type="checkbox"] {
+  display: none;
+  /* Hide the default checkbox */
+}
+
+.input-box .input-box {
+  position: relative;
+  margin-bottom: 10px;
+  /* Adjust spacing between checkboxes */
+}
+
+/* Style the custom checkbox */
+.input-box input[type="checkbox"]+label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  /* Width of the checkbox */
+  height: 20px;
+  /* Height of the checkbox */
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  /* Border color of the checkbox */
+  border-radius: 4px;
+  /* Border radius of the checkbox */
+  background-color: #fff;
+  /* Background color of the checkbox */
+}
+
+/* Style the custom checkbox when checked */
+.input-box input[type="checkbox"]:checked+label:before {
+  background-color: #3498db;
+  /* Change background color when checked */
+}
+
+/* Adjust label positioning */
+.input-box label {
+  padding-left: 30px;
+  /* Add padding to avoid collision */
+  cursor: pointer;
+}
+
+
+.wrapper .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+
+.remember-forgot label input {
+  accent-color: #fff;
+  margin-right: 3px;
+
+}
+
+.remember-forgot a {
+  color: #fff;
+  text-decoration: none;
+
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.wrapper .btn {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.wrapper .login-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+
+}
+
+.login-link p a {
+  color: #5449c8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link p a:hover {
+  text-decoration: underline;
+}
+
+#searchIcon {
+  position: absolute;
+  right: 45px;
+  top: 45px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+#loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -15px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url(../images/bg.png) no-repeat;
-    background-size: cover;
-    background-position: center;
+
+  100% {
+    transform: rotate(360deg);
   }
-  .wrapper{
-    width: 420px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(9px);
-    color: #000000;
-    border-radius: 12px;
-    padding: 30px 40px;
-  }
-  .wrapper h1{
-    font-size: 36px;
-    text-align: center;
-  }
-  .wrapper .input-box{
-    position: relative;
-    width: 100%;
-    height: 50px;
-    
-    margin: 30px 0;
-  }
-  .input-box input{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 40px;
-    font-size: 16px;
-    color: #000000;
-    padding: 20px 45px 20px 20px;
-  }
-  .input-box input::placeholder{
-    color: #000000;
-  }
-  .input-box i{
-    position: absolute;
-    right: 20px;
-    top: 30%;
-    transform: translate(-50%);
-    font-size: 20px;
-  
-  }
-  .wrapper .remember-forgot{
-    display: flex;
-    justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
-  }
-  .remember-forgot label input{
-    accent-color: #fff;
-    margin-right: 3px;
-  
-  }
-  .remember-forgot a{
-    color: #fff;
-    text-decoration: none;
-  
-  }
-  .remember-forgot a:hover{
-    text-decoration: underline;
-  }
-  .wrapper .btn{
-    width: 100%;
-    height: 45px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-  }
-  .wrapper .login-link{
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
-  
-  }
-  .login-link p a{
-    color: #5449c8;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .login-link p a:hover{
-    text-decoration: underline;
-  }
+}
+
+#suggestionsDropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  /* Adjust the distance below the input */
+  left: 0;
+  width: calc(100% - 20px);
+  /* Adjust width */
+  max-height: 200px;
+  /* Add max-height for scrolling */
+  overflow-y: auto;
+  /* Add overflow-y for scrolling */
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Translucent background */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  /* Rounded corners */
+  z-index: 1000;
+}
+
+#suggestionsDropdown>div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#suggestionsDropdown>div:hover {
+  background-color: #f0f0f0;
+  /* Hover background color */
+}

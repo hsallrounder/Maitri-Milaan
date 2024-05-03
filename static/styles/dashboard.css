@@ -59,12 +59,10 @@ main.table {
     width: 82vw;
     height: 90vh;
     background-color: #fff5;
-
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
-
-    overflow: hidden;
+    overflow: auto;
 }
 
 .table__header {
@@ -120,7 +118,6 @@ main.table {
     border-radius: .6rem;
 
     overflow: auto;
-    overflow: overlay;
 }
 
 
@@ -224,7 +221,6 @@ tbody tr.hide td img {
 }
 
 
-
 @media (max-width: 1000px) {
     td:not(:first-of-type) {
         min-width: 12.1rem;
@@ -247,4 +243,33 @@ thead th span {
 
 thead th:hover {
     color: #6c00bd;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    display: none; /* Initially hidden */
+    z-index: 9999; /* Ensure it's above other content */
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite; /* Rotate animation */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

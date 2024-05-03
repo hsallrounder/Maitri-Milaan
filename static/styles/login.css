@@ -9,15 +9,17 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(../images/bg.png) no-repeat;
+    background: url(../images/html_table.png) center / cover;
     background-size: cover;
     background-position: center;
   }
   .wrapper{
     width: 420px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(9px);
+    border: 2px solid rgba(255, 255, 255, .2);    
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
     color: #000000;
     border-radius: 12px;
     padding: 30px 40px;

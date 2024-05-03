@@ -1,2 +1,4 @@
 venv
 maitri-milaan-firebase.json
+__pycache__
+milaan_result.html

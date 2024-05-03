@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form | Maitri Milaan</title>
   <link rel="stylesheet" href="../static/styles/login.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.8em;
+    }
+  </style>
 </head>
+
 <body>
   <div class="wrapper">
-    <form action="/login" method="POST">
+    <form action="/login" method="POST" onsubmit="return validateForm()">
       <h1>Login</h1>
       <div class="input-box">
         <input type="email" id="email" name="email" placeholder="Email" required>
         <i class='bx bxs-user'></i>
+        {% if email_error %}
+        <span class="error">{{ email_error }}</span> <!-- Error message for email -->
+        {% endif %}
       </div>
       <div class="input-box">
         <input type="password" id="password" name="password" placeholder="Password" required>
-        <i class='bx bxs-lock-alt' ></i>
+        <i class='bx bxs-lock-alt'></i>
+        {% if password_error %}
+        <span class="error">{{ password_error }}</span> <!-- Error message for password -->
+        {% endif %}
       </div>
       <button type="submit" class="btn">Login</button>
       <div class="register-link">
-        <p>Dont have an account? <a href="{{ url_for('signup') }}">Register</a></p>
+        <p>Don't have an account? <a href="{{ url_for('signup') }}">Register</a></p>
       </div>
     </form>
   </div>
 </body>
+
 </html>
